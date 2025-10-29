@@ -1,0 +1,21 @@
+# Possible SQL Injection Payload Detected - LetsDefend Alert
+
+**Date: 29-10-2025 10:32 AM.
+**Category: Web Attack.
+**Tools Used: LetsDefend Sandbox, VirusTotal, AbuseIPDB, shodan.
+**Summary:
+Investigate and discover the URL with decoded payload " OR 1 = 1 -- -.
+Source: 167.99.169.17 → Destination: 172.16.17.18. Verdict: Do not escalate to Level 2, the attack was not successful (no evidence of execution/exploitation found in reviewed logs).
+
+**IOC Extracted:
+- URL-encoded value (as received): q=%22%20OR%201%20%3D%201%20--%20-
+- Decoded value (readable): q=" OR 1 = 1 -- -
+
+**Findings:
+Temporarily block/rate-limit the IP, review web and database logs +/- 5 min, and adjust WAF/input validation to reduce risk and false positives.
+
+**Conclusion:
+An SQL injection attempt was detected using the q parameter, with the payload “OR 1 = 1 -- -”, a classic pattern used to manipulate queries and bypass database filters.
+The attack was unsuccessful, as there was no evidence of improper query execution or server compromise.
+The event does not require escalation to Level 2, but it is recommended to maintain monitoring, adjust WAF rules, and validate input sanitization in the application to prevent similar attempts in the future.
+
