@@ -19,3 +19,4 @@ An SQL injection attempt was detected using the q parameter, with the payload â€
 The attack was unsuccessful, as there was no evidence of improper query execution or server compromise.
 The event does not require escalation to Level 2, but it is recommended to maintain monitoring, adjust WAF rules, and validate input sanitization in the application to prevent similar attempts in the future.
 
+![](https://github.com/4U-Git/imagenes/blob/main/1.jpg)
