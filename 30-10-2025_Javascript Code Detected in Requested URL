@@ -1,0 +1,31 @@
+# Javascript Code Detected in Requested URL - LetsDefend Alert
+
+**Date: 30-10-2025 9:15 AM.
+**Category: Web Attack.
+**Tools Used: LetsDefend Sandbox, VirusTotal, AbuseIPDB, Cisco Talos.
+**Summary:
+Investigate and discover the URL with decoded payload <$script>javascript:$alert(1)<$/script>.
+Source: 112.85.42.13 → Destination: 172.16.17.17. Verdict: Do not escalate to Level 2, the attack was not successful (JavaScript found in URL, request was allowed by device; no evidence of execution/exploitation in reviewed logs local).
+
+**IOC Extracted:
+  -Event ID: 116
+  -Date and time: 02/26/2022 6:56 PM (February 26, 2022, 6:56 PM)
+  -Rule: SOC166 - JavaScript code detected in requested URL
+  -Host name: WebServer1002
+  -Source IP (IOC — IP): 112.85.42.13
+  -Destination IP (IOC — IP): 172.16.17.17
+  -HTTP Method: GET
+  -Requested URL (IOC — URL / Payload): https://172.16.17.17/search/?q=<$script>javascript:$alert(1)<$/script>
+  -Decoded Payload: <$script>javascript:$alert(1)<$/script>
+  -User agent (IOC — UA): Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1
+  -Alert: JavaScript code detected in the URL.
+  -Device action: Allowed
+  - Translated with DeepL.com (free version)
+
+**Findings:
+I recommend adding validation to the q parameter to prevent malicious code execution and configuring the server or WAF to block URLs with suspicious scripts.
+
+**Conclusion:
+When examining the q parameter, the presence of an XSS payload is observed. Since this payload is found in the URL, it has been determined that this is a reflected XSS attack.
+When filtering by source IP address on the log management page, it can be seen that the attacker also tested different XSS payloads. It was detected that the requests belonging to the attack were redirected with status code 302.
+For this reason, the attack was unsuccessful. It is not necessary to escalate to the next level, as the attack was unsuccessful.
