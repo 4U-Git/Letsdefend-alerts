@@ -1,0 +1,45 @@
+# Possible Possible IDOR Attack Detected - LetsDefend Alert
+
+**Date: 17-11-2025 10:32 PM.
+**Category: Web Attack.
+**Tools Used: LetsDefend Sandbox, VirusTotal, AbuseIPDB, shodan.
+
+**Summary:
+Iconducted an investigation following an alert related to a possible IDOR (Insecure Direct Object Reference) attack. The traffic originated on the Internet and targeted the company's internal network.
+The incident was not part of any planned testing, and the behavior was considered malicious.
+Although the attack succeeded in accessing or manipulating an object without proper authorization, the logs reviewed and the scope of the impact showed no evidence to justify escalation to Level 2.
+
+**IOC Extracted:
+- Source IP: 134.209.118.137
+- Destination IP: 172.16.17.15
+- Host name: WebServer1005
+- HTTP method: POST
+- Requested URL: https://172.16.17.15/get_user_info/
+- User agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.1.4322)
+- Reason for alert: Consecutive requests to the same page, indicating enumeration or unauthorized access attempts.
+
+**Connection point/target resource:
+/get_user_info/– Connection point used to retrieve user-related data, potentially vulnerable to IDOR if object identifiers or parameters lack adequate authorization checks.
+
+**Recommendations:
+The attacker made repeated POST requests to /get_user_info/, according to:
+ . Enumeration of user IDs or internal references.
+ . Attempts to access different user data by manipulating parameters.
+ . Automated analysis due to a suspicious old User-Agent.
+
+**Key observations:
+ . No WAF block was triggered; the device action was allowed.
+ . The logs show no secondary exploitation or system-level breach.
+ . The behavior matches typical IDOR exploitation attempts (testing access to objects without proper authorization).
+
+**Recommended actions:
+ . Implement stricter authorization controls on /get_user_info/.
+ . Improve rate limiting and request throttling.
+ . Consider temporarily blocking or monitoring the source IP.
+ . Review application logs ±10 minutes for additional anomalies.
+
+**Conclusion:
+A malicious IDOR attempt was detected against the /get_user_info/endpoint from an external source.
+The attacker interacted with the resource in a suspicious manner, confirming the presence of unauthorized activity.
+However, no evidence of further exploitation was found.
+The incident does not require escalation to Level 2, but it is strongly recommended to strengthen the authorization logic and monitor the endpoint to prevent future exploits.
